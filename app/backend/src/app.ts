@@ -9,6 +9,7 @@ class App {
     this.app = express();
 
     this.config();
+    this.initRoute();
 
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
@@ -24,7 +25,10 @@ class App {
 
     this.app.use(express.json());
     this.app.use(accessControl);
-    this.app.use(teamRoutes);
+  }
+
+  public initRoute():void {
+    this.app.use('/teams', teamRoutes);
   }
 
   public start(PORT: string | number):void {

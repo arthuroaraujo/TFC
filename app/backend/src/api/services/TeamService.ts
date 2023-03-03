@@ -7,6 +7,7 @@ export default class TeamService implements IServiceTeam {
 
   async readAll(): Promise<Team[]> {
     const result = this.model.findAll();
+    if (!result) throw new Error('NOT_FOUND');
     return result;
   }
 

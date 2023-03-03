@@ -8,13 +8,21 @@ export default class TeamController {
   }
 
   async readAll(_req: Request, res: Response): Promise<Response | void> {
-    const result = await this._service.readAll();
-    res.status(200).json(result);
+    try {
+      const result = await this._service.readAll();
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: 'NOT_FOUND' });
+    }
   }
 
   async readById(req: Request, res: Response) {
-    const { id } = req.params;
-    const result = await this._service.readById(Number(id));
-    res.status(200).json(result);
+    try {
+      const { id } = req.params;
+      const result = await this._service.readById(Number(id));
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: 'ID_NOT_FOUND' });
+    }
   }
 }
