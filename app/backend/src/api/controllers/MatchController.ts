@@ -21,4 +21,14 @@ export default class MatchController {
       return res.status(500).json({ message: 'NOT_FOUND' });
     }
   }
+
+  async update(req: Request, res: Response): Promise<Response | void> {
+    try {
+      const { id } = req.params;
+      const result = await this._service.update(Number(id));
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(500).json({ message: 'NOT_FINISHED' });
+    }
+  }
 }

@@ -28,4 +28,17 @@ export default class MatchService implements IServiceMatch {
     if (!result) throw new Error('NOT_FOUND');
     return result;
   }
+
+  async update(id: number): Promise<{ message: string }> {
+    const result = await this.model.update(
+      {
+        inProgress: 'false',
+      },
+      {
+        where: { id },
+      },
+    );
+    if (!result) throw new Error('NOT_FINISHED');
+    return { message: 'Finished' };
+  }
 }
