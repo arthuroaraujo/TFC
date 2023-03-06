@@ -16,4 +16,16 @@ export default class MatchService implements IServiceMatch {
     if (!result) throw new Error('NOT_FOUND');
     return result;
   }
+
+  async readByProgress(inProgress: boolean): Promise<Match[]> {
+    const result = this.model.findAll({
+      where: { inProgress },
+      include: [
+        { model: Team, as: 'homeTeam', attributes: ['teamName'] },
+        { model: Team, as: 'awayTeam', attributes: ['teamName'] },
+      ],
+    });
+    if (!result) throw new Error('NOT_FOUND');
+    return result;
+  }
 }
