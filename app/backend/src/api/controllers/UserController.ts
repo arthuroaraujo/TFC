@@ -16,4 +16,13 @@ export default class UserController {
       res.status(401).json({ message: 'Invalid email or password' });
     }
   }
+
+  async readToken(req: Request, res: Response): Promise<Response | void> {
+    const token = req.headers.authorization;
+    if (token) {
+      const result = await this._service.readToken(token);
+      return res.status(200).json(result);
+    }
+    return res.status(500).json({ message: 'TOKEN_NOT_FOUND' });
+  }
 }
