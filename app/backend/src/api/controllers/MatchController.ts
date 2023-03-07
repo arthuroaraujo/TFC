@@ -47,4 +47,16 @@ export default class MatchController {
       return res.status(500).json({ message: 'UPDATE_FAILED' });
     }
   }
+
+  async create(req: Request, res: Response): Promise<Response | void> {
+    const { homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals } = req.body;
+    const result = await this._service.create({ homeTeamId,
+      awayTeamId,
+      homeTeamGoals,
+      awayTeamGoals });
+    return res.status(201).json(result);
+  }
 }

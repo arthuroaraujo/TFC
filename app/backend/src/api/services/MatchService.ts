@@ -2,6 +2,7 @@ import { ModelStatic } from 'sequelize';
 import IServiceMatch from '../interfaces/IServiceMatch';
 import Match from '../../database/models/Match';
 import Team from '../../database/models/Team';
+import IMatch from '../interfaces/IMatch';
 
 export default class MatchService implements IServiceMatch {
   protected model: ModelStatic<Match> = Match;
@@ -58,5 +59,10 @@ export default class MatchService implements IServiceMatch {
     );
     if (!result) throw new Error('UPDATED_FAIL');
     return { message: 'Updated' };
+  }
+
+  async create(dto: IMatch): Promise<Match> {
+    const result = await this.model.create({ ...dto, inProgress: true });
+    return result;
   }
 }

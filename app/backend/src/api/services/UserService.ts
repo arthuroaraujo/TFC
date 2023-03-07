@@ -2,7 +2,7 @@ import { ModelStatic } from 'sequelize';
 import * as jwt from 'jsonwebtoken';
 import * as bcrypt from 'bcryptjs';
 import User from '../../database/models/User';
-import IUser from '../interfaces/IUser';
+import IUser from '../interfaces/IServiceUser';
 
 export default class UserService implements IUser {
   protected model: ModelStatic<User> = User;

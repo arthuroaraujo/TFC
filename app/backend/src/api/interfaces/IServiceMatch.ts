@@ -1,4 +1,5 @@
 import Match from '../../database/models/Match';
+import IMatch from './IMatch';
 
 export default interface IServiceMatch {
   readAll(): Promise<Match[]>;
@@ -7,4 +8,5 @@ export default interface IServiceMatch {
   updateById(
     id: number, homeTeamGoals: number, awayTeamGoals: number
   ): Promise<{ message: string }>;
+  create(dto: IMatch): Promise<Match>;
 }

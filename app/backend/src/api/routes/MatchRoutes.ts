@@ -20,4 +20,10 @@ matchRoutes.patch(
   (req: Request, res:Response) => matchController.updateById(req, res),
 );
 
+matchRoutes.post(
+  '/',
+  TokenMiddleware.test,
+  (req: Request, res:Response) => matchController.create(req, res),
+);
+
 export default matchRoutes;
