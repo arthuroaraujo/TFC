@@ -36,6 +36,7 @@ export default class MatchController {
     try {
       const { id } = req.params;
       const { homeTeamGoals, awayTeamGoals } = req.body;
+
       const result = await this._service.updateById(
         Number(id),
         Number(homeTeamGoals),

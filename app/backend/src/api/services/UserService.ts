@@ -24,9 +24,13 @@ export default class UserService implements IUser {
   }
 
   async readToken(token: string): Promise<{ role: string }> {
-    const secret = process.env.JWT_SECRET || 'jwt_secret';
-    const email = jwt.verify(token, secret) as unknown as string;
-    const user = await this.model.findOne({ where: { email } });
-    return { role: user?.role || '' };
+    try {
+      const secret = process.env.JWT_SECRET || 'jwt_secret';
+      const email = jwt.verify(token, secret) as unknown as string;
+      const user = await this.model.findOne({ where: { email } });
+      return { role: user?.role || '' };
+    } catch (error) {
+      return { role: '' };
+    }
   }
 }
