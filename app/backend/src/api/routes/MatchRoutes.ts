@@ -2,6 +2,7 @@ import { Router, Request, Response } from 'express';
 import MatchController from '../controllers/MatchController';
 import MatchService from '../services/MatchService';
 import TokenMiddleware from '../middlewares/isTokenValid';
+import MatchesMiddleware from '../middlewares/areTeamIdsValid';
 
 const matchRoutes = Router();
 
@@ -23,6 +24,7 @@ matchRoutes.patch(
 matchRoutes.post(
   '/',
   TokenMiddleware.test,
+  MatchesMiddleware.test,
   (req: Request, res:Response) => matchController.create(req, res),
 );
 
