@@ -31,4 +31,19 @@ export default class MatchController {
       return res.status(500).json({ message: 'NOT_FINISHED' });
     }
   }
+
+  async updateById(req: Request, res: Response): Promise<Response | void> {
+    try {
+      const { id } = req.params;
+      const { homeTeamGoals, awayTeamGoals } = req.body;
+      const result = await this._service.updateById(
+        Number(id),
+        Number(homeTeamGoals),
+        Number(awayTeamGoals),
+      );
+      return res.status(200).json(result);
+    } catch (error) {
+      return res.status(500).json({ message: 'UPDATE_FAILED' });
+    }
+  }
 }

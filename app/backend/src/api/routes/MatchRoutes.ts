@@ -14,5 +14,10 @@ matchRoutes.patch(
   TokenMiddleware.test,
   (req: Request, res:Response) => matchController.update(req, res),
 );
+matchRoutes.patch(
+  '/:id',
+  TokenMiddleware.test,
+  (req: Request, res:Response) => matchController.updateById(req, res),
+);
 
 export default matchRoutes;
