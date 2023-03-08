@@ -28,4 +28,14 @@ export default class LeaderboardService implements IServiceLeaderboard {
     });
     return score;
   }
+
+  async readAll(): Promise<ILeaderboard[]> {
+    const matches = await this.modelMatch.findAll({ where: { inProgress: 'false' } });
+    const teams = await this.modelTeam.findAll();
+    const score = teams.map((team) => {
+      const object = new Scoreboard(team, matches);
+      return object.getAllScoreboard();
+    });
+    return score;
+  }
 }

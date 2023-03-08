@@ -99,4 +99,22 @@ export default class Scoreboard {
     };
     return scoreboardByTeam;
   }
+
+  public getAllScoreboard() {
+    this.attHomePoints(this.team.id);
+    this.attAwayPoints(this.team.id);
+    const scoreboardByTeam = {
+      name: this.name,
+      totalPoints: this.totalPoints,
+      totalGames: this.totalGames,
+      totalVictories: this.totalVictories,
+      totalDraws: this.totalDraws,
+      totalLosses: this.totalLosses,
+      goalsFavor: this.goalsFavor,
+      goalsOwn: this.goalsOwn,
+      goalsBalance: this.goalsBalance,
+      efficiency: this.efficiency,
+    };
+    return scoreboardByTeam;
+  }
 }

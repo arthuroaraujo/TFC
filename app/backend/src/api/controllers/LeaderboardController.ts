@@ -24,4 +24,13 @@ export default class LeaderboardController {
       res.status(500).json({ message: 'NOT_FOUND' });
     }
   }
+
+  async readAll(_req: Request, res: Response): Promise<Response | void> {
+    try {
+      const result = await this._service.readAll();
+      res.status(200).json(result);
+    } catch (error) {
+      res.status(500).json({ message: 'NOT_FOUND' });
+    }
+  }
 }
