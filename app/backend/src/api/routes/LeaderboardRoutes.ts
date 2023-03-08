@@ -12,4 +12,9 @@ leaderboardRoutes.get(
   (req: Request, res:Response) => leaderboardController.readHome(req, res),
 );
 
+leaderboardRoutes.get(
+  '/away',
+  (req: Request, res:Response) => leaderboardController.readAway(req, res),
+);
+
 export default leaderboardRoutes;

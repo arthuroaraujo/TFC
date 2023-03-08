@@ -26,7 +26,7 @@ export default class Scoreboard {
     this.efficiency = 0;
   }
 
-  public attPoints(id: number) {
+  public attHomePoints(id: number) {
     this.matches.forEach((match) => {
       if (id === match.homeTeamId) {
         if (match.homeTeamGoals > match.awayTeamGoals) {
@@ -46,8 +46,45 @@ export default class Scoreboard {
     });
   }
 
-  public getScoreboard() {
-    this.attPoints(this.team.id);
+  public getHomeScoreboard() {
+    this.attHomePoints(this.team.id);
+    const scoreboardByTeam = {
+      name: this.name,
+      totalPoints: this.totalPoints,
+      totalGames: this.totalGames,
+      totalVictories: this.totalVictories,
+      totalDraws: this.totalDraws,
+      totalLosses: this.totalLosses,
+      goalsFavor: this.goalsFavor,
+      goalsOwn: this.goalsOwn,
+      goalsBalance: this.goalsBalance,
+      efficiency: this.efficiency,
+    };
+    return scoreboardByTeam;
+  }
+
+  public attAwayPoints(id: number) {
+    this.matches.forEach((match) => {
+      if (id === match.awayTeamId) {
+        if (match.awayTeamGoals > match.homeTeamGoals) {
+          this.totalPoints += 3;
+          this.totalVictories += 1;
+        } else if (match.awayTeamGoals < match.homeTeamGoals) {
+          this.totalLosses += 1;
+        } else {
+          this.totalPoints += 1;
+          this.totalDraws += 1;
+        }
+        this.totalGames += 1;
+        this.goalsFavor += match.awayTeamGoals;
+        this.goalsOwn += match.homeTeamGoals;
+        this.goalsBalance = (this.goalsFavor - this.goalsOwn);
+      }
+    });
+  }
+
+  public getAwayScoreboard() {
+    this.attAwayPoints(this.team.id);
     const scoreboardByTeam = {
       name: this.name,
       totalPoints: this.totalPoints,

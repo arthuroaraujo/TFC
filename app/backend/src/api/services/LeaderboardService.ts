@@ -14,7 +14,17 @@ export default class LeaderboardService implements IServiceLeaderboard {
     const teams = await this.modelTeam.findAll();
     const score = teams.map((team) => {
       const object = new Scoreboard(team, matches);
-      return object.getScoreboard();
+      return object.getHomeScoreboard();
+    });
+    return score;
+  }
+
+  async readAway(): Promise<ILeaderboard[]> {
+    const matches = await this.modelMatch.findAll({ where: { inProgress: 'false' } });
+    const teams = await this.modelTeam.findAll();
+    const score = teams.map((team) => {
+      const object = new Scoreboard(team, matches);
+      return object.getAwayScoreboard();
     });
     return score;
   }
