@@ -42,6 +42,7 @@ export default class Scoreboard {
         this.goalsFavor += match.homeTeamGoals;
         this.goalsOwn += match.awayTeamGoals;
         this.goalsBalance = (this.goalsFavor - this.goalsOwn);
+        this.efficiency = Number(((this.totalPoints / (this.totalGames * 3)) * 100).toFixed(2));
       }
     });
   }

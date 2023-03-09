@@ -8,11 +8,6 @@ const leaderboardService = new LeaderboardService();
 const leaderboardController = new LeaderboardController(leaderboardService);
 
 leaderboardRoutes.get(
-  '/',
-  (req: Request, res:Response) => leaderboardController.readAll(req, res),
-);
-
-leaderboardRoutes.get(
   '/home',
   (req: Request, res:Response) => leaderboardController.readHome(req, res),
 );
@@ -20,6 +15,11 @@ leaderboardRoutes.get(
 leaderboardRoutes.get(
   '/away',
   (req: Request, res:Response) => leaderboardController.readAway(req, res),
+);
+
+leaderboardRoutes.get(
+  '/',
+  (req: Request, res:Response) => leaderboardController.readAll(req, res),
 );
 
 export default leaderboardRoutes;
